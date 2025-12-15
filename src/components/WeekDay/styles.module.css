@@ -1,0 +1,30 @@
+.dayCollum {
+  width: 60px;
+}
+.disheCollum {
+  width: 160px;
+  align-items: center;
+}
+.disheImg {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.titleCollum {
+  flex: 1;
+}
+.weekRow {
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 20px;
+}
+.img {
+  max-width: 140px;
+  border-radius: 8px;
+}
+.infoText {
+  font-weight: bold;
+  text-align: center;
+  color: #0f0f0f;
+}

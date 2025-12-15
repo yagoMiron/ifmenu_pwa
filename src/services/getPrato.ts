@@ -9,7 +9,7 @@ const getPrato = async (token: string) => {
     },
   };
 
-  const response = await axios.get(`${URL_API}/api/pratos`);
+  const response = await axios.get(`${URL_API}/api/pratos`, config);
   return response.data.pratos[0];
 };
 export default getPrato;
