@@ -39,7 +39,7 @@ const Header = () => {
           backgroundColor: theme === "dark" ? Colors.BG_DARK : Colors.BG_LIGHT,
         }}
       >
-        <img src={logo} alt="IFmenu" />
+        <img className={styles.logo_img} src={logo} alt="IFmenu" />
       </div>
       <ChangeThemeBtn />
     </div>

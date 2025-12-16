@@ -15,6 +15,7 @@ import empty_star from "../../assets/star_empty.svg";
 import type { Prato } from "../../types/Prato";
 import getPratoByDate from "../../services/getPratoByDate";
 import formatDateInString from "../../services/formatDateInString";
+import getFavoritoById from "../../services/getFavoritoById";
 
 const Plate = () => {
   const { theme, token } = useContext(UserContext);
@@ -41,14 +42,17 @@ const Plate = () => {
     (async () => {
       const formattedDateUTC = formatDateInString();
       const prato = await getPratoByDate(formattedDateUTC);
+      if (!prato) {
+        return;
+      }
       setPrato(prato);
       const avaliacao = await getAvaliacao({
         id: prato._id,
         token: token,
       });
       setAvaliacao(avaliacao);
-
-      setFav(prato.favoritado);
+      const favoritado = await getFavoritoById(token, prato._id);
+      setFav(favoritado);
     })();
   }, [token]);
   return (
