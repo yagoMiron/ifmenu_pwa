@@ -7,13 +7,14 @@ import Colors from "../../enums/colors";
 import deleteFavoritos from "../../services/deleteFavoritos";
 import postFavoritos from "../../services/postFavoritos";
 import getAvaliacao from "../../services/getAvaliacao";
-import getPrato from "../../services/getPrato";
 import postAvaliacao from "../../services/postAvaliacao";
 import RateBtn from "../../components/RateButton";
 import Separator from "../../components/Separator";
 import star from "../../assets/star.svg";
 import empty_star from "../../assets/star_empty.svg";
 import type { Prato } from "../../types/Prato";
+import getPratoByDate from "../../services/getPratoByDate";
+import formatDateInString from "../../services/formatDateInString";
 
 const Plate = () => {
   const { theme, token } = useContext(UserContext);
@@ -30,7 +31,7 @@ const Plate = () => {
     }
     setAvaliacao(avaliacao);
     postAvaliacao({
-      id: pratoDoDia.id,
+      id: pratoDoDia._id,
       token: token,
       avaliacao: avaliacao,
     });
@@ -38,14 +39,9 @@ const Plate = () => {
 
   useEffect(() => {
     (async () => {
-      const prato = await getPrato(token);
-      setPrato({
-        id: prato._id,
-        nome: prato.nome,
-        descricao: prato.descricao,
-        imagem: prato.imagem,
-        favoritado: prato.favoritado,
-      });
+      const formattedDateUTC = formatDateInString();
+      const prato = await getPratoByDate(formattedDateUTC);
+      setPrato(prato);
       const avaliacao = await getAvaliacao({
         id: prato._id,
         token: token,
@@ -64,13 +60,13 @@ const Plate = () => {
             onClick={() => {
               if (fav === true) {
                 deleteFavoritos({
-                  pratoId: pratoDoDia.id,
+                  pratoId: pratoDoDia._id,
                   token: token,
                 });
                 setFav(false);
               } else {
                 postFavoritos({
-                  pratoId: pratoDoDia.id,
+                  pratoId: pratoDoDia._id,
                   token: token,
                 });
                 setFav(true);

@@ -12,11 +12,6 @@ const postFavoritos = async ({ pratoId, token }: Props) => {
       Authorization: "Bearer " + token,
     },
   };
-  const response = await axios.post(
-    `${URL_API}/api/auth/favoritos/${pratoId}`,
-    {},
-    config
-  );
-  console.log(response);
+  await axios.post(`${URL_API}/api/auth/favoritos/${pratoId}`, {}, config);
 };
 export default postFavoritos;

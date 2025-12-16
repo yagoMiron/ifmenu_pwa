@@ -1,5 +1,5 @@
 export type Prato = {
-  id: string;
+  _id: string;
   nome: string;
   descricao: string;
   imagem: string;

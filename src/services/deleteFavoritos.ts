@@ -12,11 +12,6 @@ const deleteFavoritos = async ({ pratoId, token }: Props) => {
       Authorization: "Bearer " + token,
     },
   };
-  const response = await axios.delete(
-    `${URL_API}/api/auth/favoritos/${pratoId}`,
-    config
-  );
-
-  console.log(response);
+  await axios.delete(`${URL_API}/api/auth/favoritos/${pratoId}`, config);
 };
 export default deleteFavoritos;

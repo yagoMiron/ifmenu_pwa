@@ -34,8 +34,8 @@ const WeekDay = ({ dia }: Props) => {
   useEffect(() => {
     const getWeekDayData = async () => {
       const data = await getPratoByDate(formattedDateUTC);
-      setNome(data.nome);
-      setImage(data.imagem);
+      setNome(data?.nome || "-");
+      setImage(data?.imagem || "");
     };
     getWeekDayData();
   });
@@ -60,7 +60,15 @@ const WeekDay = ({ dia }: Props) => {
             Carregando...
           </span>
         ) : (
-          <img className={styles.img} src={image} alt={nome} />
+          <>
+            {!image ? (
+              <span className={styles.infoText} style={{ fontSize: 16 }}>
+                -
+              </span>
+            ) : (
+              <img className={styles.img} src={image} alt={nome} />
+            )}
+          </>
         )}
       </div>
     </div>

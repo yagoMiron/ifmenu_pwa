@@ -16,7 +16,8 @@ const getAvaliacao = async ({ id, token }: Props) => {
     `${URL_API}/api/pratos/${id}/minha-avaliacao`,
     config
   );
-
-  return response.data.avaliacao.avaliacao;
+  if (response.data.avaliacao) {
+    return response.data.avaliacao.avaliacao;
+  }
 };
 export default getAvaliacao;
